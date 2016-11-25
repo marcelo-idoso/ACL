@@ -1,0 +1,24 @@
+<?php
+if($this->success){
+    echo '<div class="alert alert-success">'.$this->success[0].'<button type="button" class="close" data-dismiss="alert">X</button></div>';
+}
+if($this->error){
+    echo '<div class="alert alert-error">'.$this->success[0].'<button type="button" class="close" data-dismiss="alert">X</button></div>';
+}
+
+$form = $this->form ;
+$this->formElementErrors()
+        ->setMessageOpenFormat('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>')
+        ->setMessageCloseString('</div>')
+        ->render($form);
+$form->setAttribute('class', 'form-horizontal')
+     ->setAttribute('action' , $this->url('module/default' , array(
+                                                        'controller' => 'module' , 
+                                                        'action'     => 'inserir' )));
+$form->prepare();
+?>
+<?php
+
+echo $this->form()->openTag($form);
+echo $this->formCollection()->render($form);
+echo $this->form()->closeTag(); ?>

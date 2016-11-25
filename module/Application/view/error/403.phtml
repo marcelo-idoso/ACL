@@ -1,0 +1,19 @@
+<div class="alert alert-danger">
+    <h3 style="margin-top:0"><?php echo $this->translate('Ocorreu um erro!') ?></h3>
+    <p>    
+        <?php if (\BjyAuthorize\Guard\Controller::ERROR === $error) : ?>
+            Você não tem permissão de acessar esta área. <?php echo($controller); ?>
+            <?php if ($action) : ?>
+                ::<?php echo($action); ?>Action()
+            <?php endif; ?>
+            .
+        <?php elseif (\BjyAuthorize\Guard\Route::ERROR === $error) : ?>
+            Você não tem permissão de acessar esta área. <?php echo $route; ?>.
+        <?php elseif ($error == 'error-unauthorized') : ?>
+            Você não tem permissão de acessar esta área <?php echo $reason; ?>.
+        <?php else : ?>
+            An unknown error occurred.
+        <?php endif; ?>
+    </p>
+</div>
+
