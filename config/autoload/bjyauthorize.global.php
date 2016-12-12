@@ -30,7 +30,7 @@ return array(
             'BjyAuthorize\Provider\Rule\Config' => array(
                 'allow' => array(
                     array('authenticated', 'Home', 'see'),
-                    array('user', 'Ticket', 'create'),
+                    array('Usuario', 'Ticket', 'create'),
                     array('agent', 'Ticket', array('change_status', 'read')),
                 )
             ),
@@ -43,7 +43,7 @@ return array(
                     'roles' => array('guest', 'authenticated')),
                 array(
                     'controller' => 'Application\Controller\Index',
-                    'roles' => array('authenticated', 'user')),
+                    'roles' => array('authenticated', 'Usuario')),
                 array(
                     'controller' => 'Application\Controller\Ticket',
                     'roles' => array('agent')
@@ -54,6 +54,10 @@ return array(
                 ),
                 array(
                     'controller' => 'Application\Controller\Module',
+                    'roles' => array('authenticated')
+                ),
+                array(
+                    'controller' => 'Application\Controller\Controller',
                     'roles' => array('authenticated')
                 ),
             ),

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,6 +7,7 @@
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Application;
 
 return array(
@@ -14,39 +16,49 @@ return array(
             'home' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/[page/:page]',
+                    'route' => '/[page/:page]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                        'module'     => 'application',
+                        'action' => 'index',
+                        'module' => 'application',
                     ),
                 ),
             ),
-            'application' => array(
-                'type'    => 'Literal',
+            'login' => array (
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route' => '/login',
                     'defaults' => array(
-                        'controller'    => 'Index',
-                        'action'        => 'index',
+                        'controller' => 'zfcuser' ,
+                        'action'     => 'login' ,
+                    ),
+                )
+            ),
+            'application' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/application',
+                    'defaults' => array(
+                        'controller' => 'Index',
+                        'action' => 'index',
                         '__NAMESPACE__' => 'Application\Controller',
-                        'module'     => 'application'
+                        'module' => 'application'
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route' => '/[:controller[/:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
                             ),
                         ),
-                        'child_routes' => array( //permite mandar dados pela url 
+                        'child_routes' => array(//permite mandar dados pela url 
                             'wildcard' => array(
                                 'type' => 'Wildcard'
                             ),
@@ -57,100 +69,174 @@ return array(
             'change' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/change',
+                    'route' => '/change',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Ticket',
-                        'action'     => 'changestatus',
-                        'module'     => 'change',
+                        'action' => 'changestatus',
+                        'module' => 'change',
                     ),
                 ),
             ),
             'create' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/create',
+                    'route' => '/create',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Ticket',
-                        'action'     => 'create',
-                        'module'     => 'application',
+                        'action' => 'create',
+                        'module' => 'application',
                     ),
                 ),
             ),
             'read' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/read',
+                    'route' => '/read',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Ticket',
-                        'action'     => 'read',
-                        'module'     => 'application',
+                        'action' => 'read',
+                        'module' => 'application',
                     ),
                 ),
             ),
             'site' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/site',
+                    'route' => '/site',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Site',
-                        'action'     => 'site',
-                        'module'     => 'application',
+                        'action' => 'site',
+                        'module' => 'application',
                     ),
                 ),
             ),
             'menu' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/menu',
+                    'route' => '/menu',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Navigation',
-                        'action'     => 'menu',
-                        'module'     => 'application',
+                        'action' => 'menu',
                     ),
                 ),
             ),
             'module' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/module',
+                    'route' => '/module',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Application\Controller\Module',
-                        'action'     => 'index',
-                        'module'     => 'module',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'inserir' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/inserir',
+                            'defaults' => array(
+                                'action' => 'inserir',
+                            )
+                        )
+                    ),
+                    'editar' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/editar[/:id]',
+                            'constraints' => array(
+                                'id' => '\d+'
+                            ),
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Application\Controller\Module',
+                                'action' => 'editar',
+                                'id' => 0,
+                            )
+                        )
+                    ),
+                    'excluir' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/excluir[/:id]',
+                            'constraints' => array(
+                                'id' => '\d+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'excluir',
+                                'id' => 0,
+                            )
+                        )
+                    )
+                ),
+            ),
+            'controller' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/controller',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Application\Controller\Controller',
+                        'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'inserir' => array(
                         'type' => 'Segment',
-                            'options' => array(
-                                'route'    => '/inserir',
-                                
-                            ),
+                        'options' => array(
+                            'route' => '/inserir',
+                            'defaults' => array(
+                                'action' => 'inserir',
+                                'controller' => 'Application\Controller\Controller',
+                            )
                         )
                     ),
-                )
-         
+                    'editar' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/editar[/:id]',
+                            'constraints' => array(
+                                'id' => '\d+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'editar',
+                                'id' => 0,
+                            )
+                        )
+                    ),
+                    'excluir' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/excluir[/:id]',
+                            'constraints' => array(
+                                'id' => '\d+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'excluir',
+                                'id' => 0,
+                            )
+                        )
+                    )
+                ),
+            )
         ),
     ),
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-           
-             
         ),
         'aliases' => array(
-            
         )
     ),
     'translator' => array(
         'locale' => 'pt_BR',
         'translation_file_patterns' => array(
             array(
-                'type'     => 'gettext',
+                'type' => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
+                'pattern' => '%s.mo',
             ),
         ),
     ),
@@ -161,25 +247,25 @@ return array(
             'Application\Controller\Site'           => 'Application\Controller\SiteController',
             'Application\Controller\Navigation'     => 'Application\Controller\NavigationController',
             'Application\Controller\Module'         => 'Application\Controller\ModuleController',
+            'Application\Controller\Controller'     => 'Application\Controller\ControllerController',
         ),
     ),
     'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
-        'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/403Permission'     => __DIR__ . '/../view/error/403.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        'display_not_found_reason'  => true,
+        'display_exceptions'        => true,
+        'doctype'                   => 'HTML5',
+        'not_found_template'        => 'error/404',
+        'exception_template'        => 'error/index',
+        'template_map'              => array(
+            'layout/layout'         => __DIR__ . '/../view/layout/layout_dashboard.phtml',
+            'error/404'             => __DIR__ . '/../view/error/404.phtml',
+            'error/403Permission'   => __DIR__ . '/../view/error/403.phtml',
+            'error/index'           => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
     ),
-    
     //Mapeamento de Entity Doctrine
     /* Fim configuração do doctrine */
     'doctrine' => array(
@@ -195,7 +281,6 @@ return array(
                 ),
             ),
         ),
-        
     ),
-    /* Fim configuração do doctrine */
+        /* Fim configuração do doctrine */
 );

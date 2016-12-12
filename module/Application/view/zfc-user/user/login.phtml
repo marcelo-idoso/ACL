@@ -1,0 +1,69 @@
+<?php 
+echo $this->doctype();
+$configuracao = $this->configItem();
+// Validações de Configurações Icone Logo
+if ($configuracao->getLogoIco() == NULL) {
+    $iconeLogo = 'images/favicon.ico';
+} else {
+    $iconeLogo = $configuracao->getLogoIco();
+}
+?>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+    <!-- Tell the browser to be responsive to screen width -->
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no') ?>
+    <!-- Importação dos arquivos CSS -->
+    <?php
+    echo $this->headLink(
+                    array(
+                        'rel' => 'shortcut icon',
+                        'type' => 'image/vnd.microsoft.icon',
+                        'href' => $this->basePath($iconeLogo)))
+                                        ->prependStylesheet($this->basePath('css/painel/vendor/adminlte/css/AdminLTE.min.css')) // Theme style
+                                        ->prependStylesheet($this->basePath('css/painel/vendor/fontawesome/css/font-awesome.min.css')) //  Font Awesome
+                                        ->prependStylesheet($this->basePath('css/painel/vendor/ionicons/css/ionicons.min.css')) // Ionicons
+                                        ->prependStylesheet($this->basePath('css/painel/vendor/bootstrap/css/bootstrap.min.css')) // Bootstrap 3.3.6
+    ?>
+
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">  
+    <a href="#">
+        <img src="<?php echo $this->basePath($configuracao->getLogo()) ; ?>" class="img-responsive" style="padding: 10px">
+    </a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <form action="/user/login" method="post">
+      <div class="form-group has-feedback">
+          <input type="email" class="form-control" placeholder="Email" name="identity">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+          <input type="password" class="form-control" placeholder="Password" name="credential">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+</body>
+</html>

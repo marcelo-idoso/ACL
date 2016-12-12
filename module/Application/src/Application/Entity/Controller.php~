@@ -1,0 +1,56 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Controller
+ *
+ * @ORM\Table(name="controller", indexes={@ORM\Index(name="IDX_4CF2669A68998B84", columns={"idmodule"})})
+ * @ORM\Entity
+ */
+class Controller
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ID", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ds_controller", type="string", length=45, nullable=false)
+     */
+    private $dsController;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_create", type="datetime", nullable=false)
+     */
+    private $dateCreate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_update", type="datetime", nullable=true)
+     */
+    private $dateUpdate;
+
+    /**
+     * @var \Application\Entity\Module
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Module")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idmodule", referencedColumnName="id")
+     * })
+     */
+    private $idmodule;
+
+
+}

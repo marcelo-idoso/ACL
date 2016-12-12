@@ -1,0 +1,230 @@
+<?php
+echo $this->doctype();
+/* @var $user \Application\Entity\User */
+/* @var $roles \Application\Entity\Role */
+$user = $this->zfcUserIdentity();
+$roles = $user->getRoles() ;
+?>
+
+<html lang="pt-br">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no') ?>
+    <!-- Importação dos arquivos CSS -->
+    <?php
+    echo $this->headLink(
+                    array(
+                        'rel' => 'shortcut icon',
+                        'type' => 'image/vnd.microsoft.icon',
+                        'href' => $this->basePath()))
+                                        ->prependStylesheet($this->basePath('css/dashboard/vendor/adminlte/css/skins/_all-skins.min.css')) // AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load.
+                                        ->prependStylesheet($this->basePath('css/dashboard/vendor/adminlte/css/AdminLTE.min.css')) // Theme style
+                                        ->prependStylesheet($this->basePath('css/dashboard/vendor/fontawesome/css/font-awesome.min.css')) //  Font Awesome
+                                        ->prependStylesheet($this->basePath('css/dashboard/vendor/ionicons/css/ionicons.min.css')) // Ionicons
+                                        ->prependStylesheet($this->basePath('css/dashboard/vendor/bootstrap/css/bootstrap.min.css')) // Bootstrap 3.3.6
+    ?>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index2.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>A</b>DM</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Painel</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Icone Mensagens -->
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">0</span>
+                            </a>   
+                        </li>
+                        <!-- Fim Icone Mensagens -->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">0</span>
+                            </a>
+                        </li>
+                        <!-- Fim Notifications: style can be found in dropdown.less -->
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <li class="dropdown tasks-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-flag-o"></i>
+                                <span class="label label-danger">0</span>
+                            </a>
+                        </li>
+                        <!-- Fim Tasks: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="<?php echo $this->basePath('dist/img/user2-160x160.jpg');?>" class="user-image" alt="User Image">
+                                <span class="hidden-xs"><?= $user->getUsername() ;?></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="<?php echo $this->basePath('dist/img/user2-160x160.jpg'); ?>" class="img-circle" alt="User Image">
+                                    <p>
+                                        <?= $user->getUsername() ;?> - <?= $roles[0]->getRoleId() ?>
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Fim User Account: style can be found in dropdown.less -->
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!--******************Menu Lateral ***********************-->
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="<?php echo $this->basePath('dist/img/user2-160x160.jpg') ; ?>" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p><?= $user->getUsername() ;?></p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->               
+                <?php $partial = array('partials/navigation.phtml', 'default') ?>
+                <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+                <?php echo $this->navigation('navigation')->menu()->render() ?>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+         <!--****************** Fim Menu Lateral ***********************-->
+        <!--******************Corpo do Painel  ***********************-->
+        <div class="content-wrapper">
+            
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Painel 
+                    <small>de Controle</small>
+                </h1>    
+            <!-- Breadcrumb -->
+                <?php
+                    echo $this->navigation('navigation')->breadcrumbs()
+                          ->setMinDepth(0)
+                          ->setPartial('partials/breadcrumbs.phtml');
+                ?>
+                <!-- fim Breadcrumb -->
+            </section>
+            <!-- Fim Content Header (Page header) -->
+            <!-- Main content -->
+    <section class="content">
+        <?php echo $this->content ;?>
+    </section>
+    <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.7
+            </div>
+            <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+          
+           
+        </aside>
+        <!-- Fim control-sidebar -->
+        
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+
+    <!-- Importação dos arquivos JavaScrip-->
+    <!-- AdminLTE for demo purposes -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/AdminLTE/demo.js')); ?>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/AdminLTE/pages/dashboard.js')); ?>
+    <!-- AdminLTE App -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/AdminLTE/app.min.js')); ?>
+    <!-- fastclick -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/fastclick/fastclick.js')); ?>
+    <!-- Bootstrap 3.3.6 -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/bootstrap/bootstrap.min.js')); ?>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/conflict.js')); ?>
+    <!-- jQuery UI 1.11.4 -->
+    <?php $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/jQueryUI/jquery-ui.min.js')); ?>
+    <!-- jQuery 2.2.3 -->
+    <?php echo $this->headScript()->prependFile($this->basePath('js/dashboard/vendor/jQuery/jquery-2.2.3.min.js')); ?>
+
+
+    <?php echo $this->inlineScript(); ?>
+</body>
+</html>

@@ -6,10 +6,10 @@ use Doctrine\ORM\EntityManager;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
 abstract class AbstractService {
-    
+
     protected $em;
     protected $entity;
-    
+
     /**
      * 
      * @param EntityManager $em
@@ -17,20 +17,32 @@ abstract class AbstractService {
     public function __construct(EntityManager $em) {
         $this->em = $em;
     }
-    
+
     public function save(Array $data = array()) {
-        if (isset($data['id'])){
+        if (isset($data['id'])) {
             $entity = $this->em->getReference($this->entity, $data['id']);
-            
+
             $hydrator = new ClassMethods();
             $hydrator->hydrate($data, $entity);
-        }else{
+        } else {
             $entity = new $this->entity($data);
         }
         
         $this->em->persist($entity);
         $this->em->flush();
-        
+
         return $entity;
     }
+
+    public function remove(Array $dados = array()) {
+        $entity = $this->em->getRepository($this->entity)->findOneBy($dados);
+        if ($entity) {
+            $this->em->remove($entity);
+            $this->em->flush();
+            return $entity;
+        } else {
+            
+        }
+    }
+
 }

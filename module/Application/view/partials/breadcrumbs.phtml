@@ -1,0 +1,30 @@
+<style>
+    .breadcrumb > li + li:before {
+     content: "\00BB";
+     color: #aaa;
+}
+</style>
+<ol class="breadcrumb">
+
+    <?php
+    // iterate through the pages
+    foreach ($this->pages as $key => $page): ?>   
+        <li>
+            <?php
+            
+            // if this isn't the last page, add a link and the separator
+            if ($key < count($this->pages) - 1):
+                ?>
+                <a  href="<?php echo $page->getHref(); ?>"> <i class="<?php echo $page->get("icon") ;?>"></i><?php echo $page->getLabel(); ?></a>
+            <?php
+            // otherwise, just output the name
+            else:
+            ?>
+                <a class="active">
+                    <i class="<?php echo $page->get("abstrac") ;?>"></i><?php echo $page->getLabel(); ?>
+                </a>
+                    <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+</ol>
+

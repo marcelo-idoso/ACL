@@ -16,5 +16,6 @@ class ModuleService extends AbstractService {
     public function __construct(EntityManager $em) {
         $this->entity = '\Application\Entity\Module';
         parent::__construct($em);
+        
     }
 }

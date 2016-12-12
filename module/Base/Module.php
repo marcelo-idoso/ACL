@@ -18,4 +18,12 @@ class Module
             ),
         );
     }
+    public function getViewHelperConfig() {
+        return array(
+            'invokables' => array(
+                'render_form'   => 'Base\Helper\FormBoostrap',
+               
+            )
+        );
+    }
 }
