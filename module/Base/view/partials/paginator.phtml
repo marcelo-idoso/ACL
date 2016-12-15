@@ -1,0 +1,55 @@
+<?php
+// Configura o Url para Retoranar page/2 ao inves de  ?page=2
+$urlPattern = $_SERVER['REQUEST_URI'];
+$formatUrl = function ($page) use ($urlPattern){
+    if(!preg_match('/page/', $urlPattern)){
+        return $urlPattern . '/page/' .(int) $page;
+    }else{
+        return preg_replace('@/page/(\d+)@', '/page/'.(int)$page , $urlPattern);
+    }
+};
+?>
+<?php if ($this->pageCount > 1) : ?>
+    <div class="col col-xs-4">
+            Pagina
+            <?php echo $this->current; ?>
+            de
+            <?php echo $this->pageCount; ?>
+    </div>
+    <div class="col col-xs-8">
+        <ul id='paginatorList' class="pagination hidden-xs pull-right">
+            <?php if (isset($this->previous)) : ?>
+                <li>
+                    <a href="<?php echo $formatUrl($this->previous) ;?>" title="Ir para pagina Anterior">
+                        Anterior
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="paginate_button previous disabled">
+                    <a href="#" onclick="return  false ; "> Anterior </a>
+                </li>
+            <?php endif;?>
+            <!--For para listar as paaginas -->
+            <?php foreach ($this->pagesInRange as $page) : ?> 
+                <?php if ($page != $this->current) : ?>
+                    <li> 
+                        <a href="<?php echo $formatUrl($page) ; ?>"><?php echo $page ; ?></a>
+                    </li>
+                <?php else : ?>
+                    <li class="paginate_button active">
+                        <a href="#"><?php echo $page; ?></a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+             <?php if (isset($this->next)): ?>
+                <li>
+                    <a href="<?php echo $formatUrl($this->next) ; ?>">Próximo</a>
+                </li>
+            <?php else: ?>
+                <li class="paginate_button disabled">
+                    <a href="#" onclick="return false;" title="Ir para próxima pagina">Próxima</a>
+                </li>
+            <?php endif;?>         
+        </ul>
+    </div>
+<?php endif; ?>

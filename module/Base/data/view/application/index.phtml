@@ -12,7 +12,6 @@
     <!--*************** Corpo da pagina ***************-->
     <div class="box-body">
         <?php
-        /* @var $entity \Application\Entity\Controller */
         if ($this->success) {
             echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">X</button></div>';
         }
@@ -25,32 +24,24 @@
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
-
                         <div class="col col-xs-6 pull-right  text-right">
-                            <a class="btn btn-success" href="<?php echo $this->url( "$this->router/inserir") ?>">
+                            <a class="btn btn-success" href="<?php echo $this->url("$this->router/inserir") ?>">
                                 Novo Registro  <i class="glyphicon glyphicon-plus"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <?php 
-                            var_dump($this->data);
-                    if ($this->data): ?>
+                    <?php if ($this->data): ?>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>
                                         #
                                     </th>
-                                    <th>
-                                        Nome 
-                                    </th>
-                                    <th>
-                                        Module
-                                    </th>
+                                    
                                     <th style="width: 100px">
-                                        <em class="fa fa-cog"></em>
+                                        <i class="fa fa-cog"></i>
                                     </th>
                                 </tr>
                             </thead>
@@ -58,23 +49,19 @@
                                 <?php foreach ($this->data as $entity) : ?>
                                     <tr>
                                         <td> <?php echo $entity->getId(); ?>                        </td>
-                                        <td> <?php echo $entity->getDsController(); ?>              </td>
-                                        <td> <?php echo ($entity->getIdmodule()) ? $entity->getIdmodule()->getNome() : ' '; ?>              </td>
-
                                         <td>
-                                            <a class="btn btn-success" href="<?php
-                                            echo $this->url("$this->router/editar", array(
-                                                'controller' => 'controller',
-                                                'action' => 'editar',
-                                                'id' => $entity->getId()));
+                                            <a class="btn btn-success" href="<?= $this->url("$this->router/editar", array(
+                                                'controller' => $this->router,
+                                                'action'     => 'editar',
+                                                'id'         => $entity->getId()));
                                             ?>">
                                                 <i class="glyphicon glyphicon-edit"></i>
                                             </a>
-                                            <a class="btn btn-danger" href="<?php
-                                            echo $this->url("$this->router/excluir", array(
-                                                'controller' => 'controller',
-                                                'action' => 'excluir',
-                                                'id' => $entity->getId()));
+                                            
+                                            <a class="btn btn-danger" href="<?= $this->url("$this->router/excluir", array(
+                                                'controller'  => $this->router,
+                                                'action'      => 'excluir',
+                                                'id'          => $entity->getId()));
                                             ?>">
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </a>

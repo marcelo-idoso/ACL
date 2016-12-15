@@ -68,13 +68,15 @@ abstract class AbstractController extends AbstractActionControllerLos{
                         'success'   => $this->flashMessenger()->getSuccessMessages(),
                         'data'      => $paginator,
                         'page'      => $page,
+                        'router'    => $this->route,
                     )
             );
         }
         return new ViewModel(
                 array(
-                    'data' => $paginator,
-                    'page' => $page,
+                    'router'    => $this->route,
+                    'data'      => $paginator,
+                    'page'      => $page,
                 )
         );
     }
@@ -116,6 +118,7 @@ abstract class AbstractController extends AbstractActionControllerLos{
             return new ViewModel(
                     array(
                         'form'      => $form ,
+                        'router'    => $this->route,
                         'success'   => $this->flashMessenger()->getSuccessMessages()
                     )
             );
@@ -124,6 +127,7 @@ abstract class AbstractController extends AbstractActionControllerLos{
             return new ViewModel(
                     array(
                       'form'      => $form ,
+                      'router'    => $this->route,
                       'success'   => $this->flashMessenger()->getErrorMessages()  
             ));
         }
@@ -131,7 +135,8 @@ abstract class AbstractController extends AbstractActionControllerLos{
         $this->flashMessenger()->clearMessages();
         return new ViewModel(
                 array(
-                    'form'      => $form
+                    'form'      => $form,
+                    'router'    => $this->route,
                 ));
     }
     
@@ -182,6 +187,7 @@ abstract class AbstractController extends AbstractActionControllerLos{
                     array(
                         'form'      => $form,
                         'success'   => $this->flashMessenger()->getSuccessMessages(),
+                        'router'    => $this->route,
                         'id'        => $param
                     ));
         }
@@ -190,6 +196,7 @@ abstract class AbstractController extends AbstractActionControllerLos{
                     array(
                         'form'      => $form,
                         'error'     => $this->flashMessenger()->getErrorMessages(),
+                        'router'    => $this->route,
                         'id'        => $param
                     ));
         }
@@ -198,6 +205,7 @@ abstract class AbstractController extends AbstractActionControllerLos{
                     array(
                         'form'      => $form,
                         'error'     => $this->flashMessenger()->getInfoMessages(),
+                        'router'    => $this->route,
                         'id'        => $param
                     ));
         }
@@ -206,6 +214,7 @@ abstract class AbstractController extends AbstractActionControllerLos{
         return new ViewModel(
                 array(
                     'form' => $form,
+                    'router'    => $this->route,
                     'id'   => $param
                 ));
     }

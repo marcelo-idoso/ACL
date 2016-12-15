@@ -29,8 +29,8 @@
                     ->setMessageCloseString('</div>')
                     ->render($form);
             $form->setAttribute('class' , 'form-horizontal')
-                 ->setAttribute('action' , $this->url('controller/editar' , array(
-                                                                                    'controller' => 'controller' , 
+                 ->setAttribute('action' , $this->url("$this->router/editar" , array(
+                                                                                    'controller' => $this->router , 
                                                                                     'action'     => 'editar' ,
                                                                                     'id'         => $this->id)));
             $form->prepare();

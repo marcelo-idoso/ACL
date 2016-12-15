@@ -22,7 +22,6 @@ class Module
         return array(
             'invokables' => array(
                 'render_form'   => 'Base\Helper\FormBoostrap',
-               
             )
         );
     }

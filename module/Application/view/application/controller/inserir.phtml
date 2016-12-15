@@ -29,8 +29,8 @@
                  ->setMessageCloseString('</div>')
                  ->render($form);
             $form->setAttribute('class', 'form-horizontal')
-                 ->setAttribute('action' , $this->url('controller/inserir' , array(
-                                                        'controller' => 'controller' , 
+                 ->setAttribute('action' , $this->url("$this->router/inserir" , array(
+                                                        'controller' => $this->router , 
                                                         'action'     => 'inserir' )));
             $form->prepare();
             

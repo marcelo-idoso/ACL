@@ -193,6 +193,20 @@ return array(
                             )
                         )
                     ),
+                    'paginator' => array(
+                        'type' => 'Segment',
+                        'options'  => array(
+                            'route' => '[/page/:page]',
+                            'constraints' => array(
+                               'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'page' => '\d+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'index',
+                                'page' => 1,
+                            )
+                        )
+                    ),
                     'editar' => array(
                         'type' => 'Segment',
                         'options' => array(
